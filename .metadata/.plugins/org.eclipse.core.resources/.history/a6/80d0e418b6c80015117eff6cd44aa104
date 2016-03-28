@@ -1,0 +1,25 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+
+public class Club {
+
+	private int array_size_increment;
+	private int numMembers;
+	private int count=1;
+	private Member members[];
+	
+	public Member addMember(String surname,String firstName,String secondName){
+		Member m=new Member(surname,secondName,firstName,count);
+		members[count]=m;
+		count++;
+		return m;
+	}
+	
+	@SuppressWarnings("unused")
+	public Member getMembers(){
+		for(int i=1;i<members.length;i++){
+		return members[i];
+	}
+}
+}

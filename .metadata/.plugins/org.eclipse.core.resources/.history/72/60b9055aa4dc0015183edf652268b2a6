@@ -1,0 +1,25 @@
+package sg.edu.iss.univsovsys;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JFrame;
+
+public class StoreSystem extends JFrame {
+	
+	public StoreSystem(ClubApplication ca){
+		super("Store Management System");
+		//this.add(new JLabel("Members"));
+		//this.setLayout(new FlowLayout());
+		WindowListener listener = new WindowAdapter(){
+			public void windowClosing(WindowEvent e){
+				ca.shutdown();
+				System.out.println("Closing Window");
+				System.exit(1);
+			}
+		};
+			addWindowListener(listener);
+	}
+
+}

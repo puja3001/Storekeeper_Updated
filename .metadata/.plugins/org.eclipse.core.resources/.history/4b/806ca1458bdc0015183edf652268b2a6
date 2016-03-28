@@ -1,0 +1,37 @@
+package sg.edu.iss.univsovsys;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Store {
+	
+	ArrayList<Category> catList = new ArrayList<Category>();
+	ArrayList<Product> prodList = new ArrayList<Product>();
+	ArrayList<Member> memList = new ArrayList<Member>();
+	HashMap<String,Member> memMap = new HashMap<String,Member>();
+	//to be added
+	
+	public void addMember(String name,String memId){
+		Member m = new Member(memId,name,-1,0,0);
+		memList.add(m);
+		memMap.put(memId,m);
+	}
+	
+	public Member getMember(String memId){
+		Member mem = memMap.get(memId);
+		return mem;	
+	}
+	
+	public ArrayList<Member> getMembers(){
+		return memList;	
+	}
+	
+	public void deleteMem(String memId){
+		for(int i=0;i<memList.size();i++){
+			if(memList.get(i).getMemId() == memId){
+				memList.remove(i);
+			}
+		}
+		memMap.remove(memId);
+	}
+}

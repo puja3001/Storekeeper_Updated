@@ -1,0 +1,74 @@
+package sg.edu.nus.iss.club.gui;
+
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class MemberPanel extends JPanel {
+	
+	final List list = new List(10,true);
+	JButton add = new JButton("Add");
+	JButton remove = new JButton("Remove");
+	ClubApplication ca;
+	ArrayList<Member> current_member_list;
+	
+	public MemberPanel(ClubApplication ca){
+	this.ca = ca;
+	this.add(list);
+	this.add(add);
+	this.add(remove);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+
+	}
+	
+	public void addButton(){
+		System.out.println("Opening add member dialog");
+		AddMemberDialog amd = new AddMemberDialog(ca);
+	}
+	
+	public void removeButton(){
+		Member m = getSelectedMember();
+		if(m!=null){
+			System.out.println("Opening remove member dialog");
+			confirmDialog cd = new confirmDialog(ca,this);
+		}
+		else{
+			JOptionPane.showMessageDialog(this,"Please select a member for removal.");
+		}
+	}
+	
+	public Member getSelectedMember(){
+		int i = list.getSelectedIndex();
+		if(i>=0){
+			Member m = current_member_list.get(i);
+			return m;
+		}
+		return null;
+	}
+	
+	public void refresh(){
+		//System.out.println("Refresh");
+		current_member_list = ca.getMembers();
+		list.removeAll();
+		for(Member member : current_member_list){
+			list.add(member.toString());
+		}
+		}
+	}

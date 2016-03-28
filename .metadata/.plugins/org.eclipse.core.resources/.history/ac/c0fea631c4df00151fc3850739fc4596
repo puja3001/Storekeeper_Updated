@@ -1,0 +1,59 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+public class BookingRegister {
+	
+	
+	Member m;
+	Facility f;
+	private HashMap<Facility,ArrayList<Booking>> listOfBookings = new HashMap<Facility,ArrayList<Booking>>();
+		
+	public Booking addBooking(Member m,Facility f,Date sd,Date ed) throws BadBookingException{
+		
+		int overlap=0;
+		Booking b1 = new Booking(m,f,sd,ed);
+		ArrayList<Booking> fac = listOfBookings.get(f);
+		if (fac == null){
+			fac = new ArrayList<Booking>();
+			fac.add(b1);
+			listOfBookings.put(f, fac);
+			System.out.println("First Booking Added");
+		}
+		else{
+			for(Booking b: fac){
+				if(b1.overlaps(b)){
+					overlap++;
+					throw new BadBookingException("Already Existing Booking");
+				}
+			}
+			if(overlap == 0){
+				fac.add(b1);
+				//listOfBookings.put(f, fac);
+				System.out.println("Booking Added!!");
+			}
+		}
+		return b1;
+	}
+	
+	public ArrayList<Booking> getBookings(Facility f,Date sd,Date ed){
+		ArrayList<Booking> all_bookings = listOfBookings.get(f);
+		ArrayList<Booking> fac_bookings = new ArrayList<Booking>(); 
+		if(all_bookings != null){
+			for(Booking b : all_bookings){
+				Date sd1 = b.getStartDate();
+				Date ed1 = b.getEndDate();
+				if((sd1.after(sd)|| sd1.equals(sd)) && (ed1.before(ed) || ed1.equals(ed))){
+					fac_bookings.add(b);
+				}
+			}
+		}
+		return fac_bookings;
+	}
+	
+	public void removeBooking(Booking b){
+		listOfBookings.remove(b);
+	}
+}

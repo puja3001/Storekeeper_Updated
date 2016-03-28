@@ -1,0 +1,127 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+public class Club {
+
+	//private int array_size_increment;
+	//private int numMembers;
+	private static int count=1;
+	private ArrayList<Member> members=new ArrayList<Member>();
+	private ArrayList<Facility> fac=new ArrayList<Facility>();
+	HashMap<String,Facility> facility = new HashMap<String,Facility>();
+	
+	BookingRegister br1 = new BookingRegister();
+	
+	public Club(String fn){
+	}
+	
+	public void addMember(String surname,String firstName,String secondName){
+		System.out.println("fn "+firstName+" sn "+secondName+" ln "+surname);
+		Member m = new Member(surname,secondName,firstName,count);
+		members.add(m);
+		store(this);
+		count++;
+		//System.out.println("Members "+members);
+	}
+
+	public ArrayList<Member> getMembers(){
+		//System.out.println("Inside club class "+members);
+		return members;
+	}
+		
+	public void showMembers(){
+		System.out.println("Members of the club::\n");
+		for(int i=0;i<members.size();i++){
+			System.out.println(members.get(i)+"\n");
+			}
+	}
+	
+	public Member getMember(int memberNum){
+		for(int i=0;i<members.size();i++){
+			if(members.get(i).memberNumber==memberNum){
+				return members.get(i);
+				}
+			}
+		return null;
+	}
+	
+	public void removeMember(int memberNum){
+		int found_flag=0;
+		int found_id = 0;
+		for(int i=0;i<members.size();i++){
+			if(members.get(i).memberNumber==memberNum){
+				found_flag++;
+				found_id = i;
+			}
+		}
+		if(found_flag==1){
+			System.out.println("Removing member with id: "+memberNum);
+			members.remove(found_id);
+			System.out.println("...Removed!!");
+			}
+		else{
+			System.out.println("Member with given id "+memberNum +" is not present");
+		}		
+	}
+    public void listOfFacilites(Facility f){
+    	facility.put(f.getName(),f);	
+    }
+    
+    public void addFacility(String name,String desc){
+    	Facility f = new Facility(name,desc);
+		fac.add(f);
+		listOfFacilites(f);
+    }
+    
+    public Facility getFacility(String name){
+    	Facility f = facility.get(name);
+    	return f;	
+    }
+    
+    public HashMap<String,Facility> getFacilities(){
+    	return facility;  	
+    }
+    
+    public ArrayList<Facility> getFacilityList(){
+    	return fac;  	
+    }
+    
+    public void removeFacility(String name){
+		facility.remove(name);	
+	}
+    
+    public void showFacilities(){
+    	System.out.println("List of all Facilities:");
+		for (Facility f : fac){
+			System.out.println(f+"\n");
+		}
+	}
+    
+	public void addBooking(int memNum,String fName,Date sd, Date ed) throws BadBookingException{
+		Member mem = getMember(memNum);
+		Facility fac = getFacility(fName);
+		br1.addBooking(mem, fac, sd, ed);
+		
+	}
+	
+	public void removeBooking(Booking b){
+		br1.removeBooking(b);	
+	}
+	
+	public ArrayList<Booking> getBookings(String fName,Date sd,Date ed){
+		Facility fac = getFacility(fName);
+		return br1.getBookings(fac, sd, ed);
+	}
+	
+	public void showBookings(String fName,Date sd,Date ed){
+		Facility fac = getFacility(fName);
+		ArrayList<Booking> bookings = br1.getBookings(fac, sd, ed);
+		for(Booking b : bookings){
+			b.show();
+		}
+	}
+}

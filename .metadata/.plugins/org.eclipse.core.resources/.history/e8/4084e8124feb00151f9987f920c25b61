@@ -1,0 +1,43 @@
+package window;
+
+import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class AddCategoryDialog extends JDialog {
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JButton addVendor;
+	JTextField tf1,tf2;
+	ArrayList<JTextField> listOfTextFields = new ArrayList<JTextField>();
+
+	public AddCategoryDialog() {
+		createFormPanel();
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(){
+
+		GridLayout layout = new GridLayout(0,2);
+		panel = new JPanel();
+		JLabel l1 = new JLabel(" Category Name: ");
+		JLabel l2 = new JLabel(" Category Code: ");
+		tf1 = new JTextField(10);
+		tf2 = new JTextField(10);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+	}
+}

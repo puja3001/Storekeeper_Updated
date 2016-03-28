@@ -1,0 +1,21 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.io.FileOutputStream;
+
+import sg.edu.nus.iss.club.Club;
+
+public class ClubFileStore {
+	
+	Club club;
+	
+	public ClubFileStore(Club club){
+		this.club = club;
+	}
+	
+	public void storeMembers(Club club,String filename){
+		FileOutputStream out = new FileOutputStream(filename,true);
+				
+		
+	}
+
+}

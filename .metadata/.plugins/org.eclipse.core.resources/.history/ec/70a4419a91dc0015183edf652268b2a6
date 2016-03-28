@@ -1,0 +1,27 @@
+package sg.edu.iss.univsovsys;
+
+import java.util.Date;
+
+public class Transaction {
+	
+	private int id;
+	private String prodId;
+	private String memId;
+	private int quan;
+	private Date date;
+	HashMap<String,String> purchaseList = new HashMap<String,String>();
+
+	public Transaction(int id,String prodId,String memId,int quan,Date date){
+		this.id =  id;
+		this.prodId =  prodId;
+		this.memId =  memId;
+		this.quan = quan;
+		this.date = date;
+	}
+	
+	public int getid(){
+		return id;
+	}
+	
+	public String prodId
+}

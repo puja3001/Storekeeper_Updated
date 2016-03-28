@@ -1,0 +1,79 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.*;
+
+public class AddMemberDialog extends JDialog {
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JTextField tf1,tf2,tf3;
+	
+	ClubApplication ca = new ClubApplication();
+
+	public AddMemberDialog() {
+		System.out.println("Hello add member");
+		createFormPanel();
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(){
+		System.out.println("Creating dialog box");
+		panel = new JPanel();
+		panel.add(new JLabel("Add Member"));
+		JLabel l1 = new JLabel("First Name");
+		JLabel l2 = new JLabel("Second Name");
+		JLabel l3 = new JLabel("Last Name");
+		tf1 = new JTextField(5);
+		tf2 = new JTextField(5);
+		tf3 = new JTextField(5);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+		panel.add(l1);
+		panel.add(tf1);
+		panel.add(l2);
+		panel.add(tf2);
+		panel.add(l3);
+		panel.add(tf3);
+		panel.add(ok);
+        panel.add(cancel);
+        add(panel);
+        setSize(400,300);
+        setVisible(true);
+        
+		ok.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				performOkAction();
+			}
+			});
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+	}
+
+
+	public void performOkAction(){
+		if(ok.getModel().isPressed()){
+			String fn = tf1.getText();
+			String sn = tf2.getText();
+			String ln = tf3.getText();
+			if((fn!=null && ln!= null && sn!=null) || (fn!=null && ln!= null)){
+				ca.addMember(ln, fn, sn);
+				dispose();
+			}
+		}
+	}
+}

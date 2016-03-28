@@ -1,0 +1,82 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class AddBookingDialog extends JDialog {
+	
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JTextField tf1,tf2;
+	ClubApplication ca;
+	
+
+	public AddBookingDialog(ClubApplication ca) {
+		System.out.println("Hello booking facility");
+		this.ca = ca;
+		createFormPanel();
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(){
+		System.out.println("Creating dialog box");
+		GridLayout layout = new GridLayout(0,2);
+		panel = new JPanel();
+		//panel.add(new JLabel("Add Member"));
+		JLabel l1 = new JLabel("Facility Name");
+		JLabel l2 = new JLabel("Description");
+		tf1 = new JTextField(10);
+		tf2 = new JTextField(10);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+		panel.add(l1);
+		panel.add(tf1);
+		panel.add(l2);
+		panel.add(tf2);
+		panel.add(ok);
+        panel.add(cancel);
+        panel.setLayout(layout);
+        setTitle("Add Facility");
+        add(panel);
+        setSize(300,200);
+        setVisible(true);
+        
+		ok.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				performOkAction();
+			}
+			});
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+	}
+
+
+	public void performOkAction(){
+		String name = tf1.getText();
+		String desc = tf2.getText();
+		if(!name.isEmpty() && !desc.isEmpty()){
+			ca.addFacility(name,desc);
+			dispose();
+		}
+	}
+
+}

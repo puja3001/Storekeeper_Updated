@@ -1,0 +1,75 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import sg.edu.nus.iss.club.Booking;
+import sg.edu.nus.iss.club.Club;
+import sg.edu.nus.iss.club.Facility;
+import sg.edu.nus.iss.club.Member;
+
+public class ClubFileStore {
+	
+	Club club;
+	String filename;
+	
+	public ClubFileStore(Club club,String filename){
+		this.club = club;
+		this.filename = filename;
+	}
+	
+	public void store(Club club,Member m,Facility f) throws IOException{
+		FileWriter r = new FileWriter(filename,true);
+		PrintWriter pr = new PrintWriter(r);
+		
+		if(m!=null){
+			storeMembers(pr,m);
+		}
+		if(f!=null){
+			storeFacilities(pr,f);
+		}
+		pr.close();
+	}
+	
+	/*public Club retrieve() throws IOException{
+		FileInputStream fis = new FileInputStream("club.dat");
+		DataInputStream dis = new DataInputStream(fis);
+		club = new Club();
+	}*/
+	
+	public void storeMembers(PrintWriter dout,Member mem) throws IOException{
+		dout.println("Members ");
+		storeString(dout,mem.toString());
+		dout.print(" "+mem.getMemberNumber());
+		dout.print("\n");
+	}
+	
+	public void storeFacilities(PrintWriter dout,Facility fac) throws IOException{
+		dout.println("Facilities ");
+		storeString(dout,fac.getName());
+		dout.print(" ");
+		storeString(dout,fac.getDescription());
+		dout.print("\n");
+	}
+	
+	public void storeBookings(PrintWriter dout,Booking book) throws IOException{
+		dout.println("Bookings ");
+		dout.print(book.toString());
+		dout.print("\n");
+	}
+
+	public void storeString(PrintWriter dout,String str) throws IOException{
+		dout.print(str.length()+" ");
+		for(int i =0;i<str.length();i++){
+			System.out.println("Store show11: "+str.charAt(i));
+			dout.print(str.charAt(i));
+		}
+	}
+}

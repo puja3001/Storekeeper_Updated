@@ -1,0 +1,13 @@
+package sg.edu.nus.iss.club.gui;
+
+public class ClubApplication {
+	
+	public static void main(String args[]){
+		
+		ClubWindow frame = new ClubWindow();
+		frame.setSize(270,70);
+		frame.setVisible(true);
+		
+
+	}
+}

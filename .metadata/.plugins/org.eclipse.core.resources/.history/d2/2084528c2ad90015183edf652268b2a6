@@ -1,0 +1,22 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+public class AddMemberDialog extends Dialog {
+
+	public AddMemberDialog(Dialog owner) {
+		super(owner);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void createFormPanel(){
+		
+		Panel panel = new Panel();
+		JTextField txt1 = new JTextField();
+		JTextField txt2 = new JTextField();
+		JTextField txt3 = new JTextField();
+	}
+
+}

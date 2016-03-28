@@ -1,0 +1,51 @@
+package sg.edu.nus.iss.club;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+public class ClubApplication {
+
+    public static void main (String args[]) throws ParseException {
+
+        Person member1, member2, member3;
+        Facility fac1, fac2, fac3;
+        Club c2 = new Club();
+
+        member1 = new Person ("Edison", "Thomas", "Alva");
+        member2 = new Person ("Baggio", "Roberto", null);
+        member3 = new Person ("Webber", "Andrew", "Lloyd");
+        
+        Member m1 = new Member("Agarwal","Puja",null,1969);
+        Member m2 = c2.addMember("Agarwal", "Puja", "LL1");
+        Member m3 = c2.addMember("Agarwal", "Puja", "LL2");
+        Member m4 = c2.addMember("Agarwal", "Puja", "LL3");
+        
+        //fac1 = new Facility ("Main Hall", null);
+        //fac2 = new Facility ("Room1", "Conference Room on Level 2");
+        //fac3 = new Facility ("Room2", "Meeting Room on Level 3");
+        
+        fac1 = c2.addFacility("Main Hall", null);
+        fac2 = c2.addFacility("Room1", "Conference Room on Level 2");
+        fac3 = c2.addFacility("Room2", "Meeting Room on Level 3");
+        
+        SimpleDateFormat ft = new SimpleDateFormat ("d-MMM-yyyy H:mm");
+        
+        Booking b1 = new Booking(m2,fac1, ft.parse("2016-02-15"), ft.parse("2016-02-20"));
+        m1.show();
+        System.out.println("To test the addMember function:");
+        m2.show();
+        //System.out.println ("\nFacilities:");
+        //fac1.show ();
+        //fac2.show ();
+        //fac3.show ();
+        List<Member> list_of_members = c2.getMembers();
+        System.out.println("Complete List of Members:\n"+list_of_members);
+        c2.showMembers();
+        System.out.println("Member with given id is: "+c2.getMember(2));
+        c2.removeMember(3);
+        System.out.println("Updated List of Members:\n"+list_of_members);
+    }
+
+}

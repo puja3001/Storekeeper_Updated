@@ -1,0 +1,17 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JFrame;
+
+public class ClubWindow extends JFrame{
+	public static void main(String args[]){
+		JFrame main_frame = new JFrame("Club");
+		main_frame.setSize(270,70);
+		main_frame.setLayout(new FlowLayout());
+		
+		
+		main_frame.setVisible(true);
+	}
+
+}

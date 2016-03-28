@@ -1,0 +1,22 @@
+package sg.edu.iss.univsovsys;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Store {
+	
+	ArrayList<Category> catList = new ArrayList<Category>();
+	ArrayList<Product> prodList = new ArrayList<Product>();
+	ArrayList<Member> memList = new ArrayList<Member>();
+	HashMap<String,Member> memMap = new HashMap<String,Member>();
+	//to be added
+	
+	public void addMember(String name,String memId){
+		Member m = new Member(memId,name,-1,0,0);
+		memList.add(m);
+	}
+	
+	public Member getMember(String memId){
+		
+	}
+}

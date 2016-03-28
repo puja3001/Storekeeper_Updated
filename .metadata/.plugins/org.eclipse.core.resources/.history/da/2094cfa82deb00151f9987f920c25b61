@@ -1,0 +1,38 @@
+package window;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+/**
+ * 
+ * @author agarwal.puja
+ *
+ */
+public class MainManageWindow extends JFrame {
+	
+	JTabbedPane tabbedPane = new JTabbedPane();
+	MemberPanel memberPanel = new MemberPanel();
+	JPanel productPanel = new JPanel();
+	JPanel categoryPanel = new JPanel();
+	JPanel vendorPanel = new JPanel();
+	JPanel discountPanel = new JPanel();
+	JPanel inventoryPanel = new JPanel();
+	JPanel replenishPanel = new JPanel();
+	
+	public MainManageWindow() 
+	   { 
+	      super(); 
+	      this.setSize(700, 500); 
+	      this.setLocation(600, 300);
+	      getContentPane().add(tabbedPane);
+	      tabbedPane.addTab("Members", (JPanel)memberPanel);
+	      tabbedPane.addTab("Products", productPanel);
+	      tabbedPane.addTab("Category", categoryPanel);
+	      tabbedPane.addTab("Vendors", vendorPanel);
+	      tabbedPane.addTab("Discounts", discountPanel);
+	      tabbedPane.addTab("Check Inventory", inventoryPanel);
+	      tabbedPane.addTab("Replenish Inventory", replenishPanel);
+	      //this.getContentPane().setLayout(null);
+	      this.setTitle("Welcome"); 
+	   } 
+}

@@ -1,0 +1,36 @@
+package sg.edu.nus.iss.club.gui;
+
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+public class MemberPanel extends Panel {
+	
+	final List list = new List(10,true);
+	Button add = new Button("Add");
+	
+	public MemberPanel(){
+	list.add("Members");
+	this.add(list);
+	this.add(add);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Opening add member dialog");
+			AddMemberDialog amd = new AddMemberDialog();
+		}
+		});
+	}
+
+	
+	public void refresh(ClubApplication ca){
+		System.out.println("Refresh");
+		ArrayList<Member> current_member_list = ca.getMembers();
+		for(Member member : current_member_list){
+			list.add(member.toString());		
+		}
+		list.add("Puja");
+	}
+}

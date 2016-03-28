@@ -1,0 +1,98 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import sg.edu.nus.iss.club.Booking;
+import sg.edu.nus.iss.club.Facility;
+import sg.edu.nus.iss.club.Member;
+
+public class BookingPanel extends JPanel {
+	
+	final List list = new List(10,true);
+	JButton add = new JButton("Add");
+	JButton remove = new JButton("Remove");
+	JLabel label = new JLabel("Bookings On");
+	JTextField tf = new JTextField(10);
+	JLabel l2 = new JLabel("(d-MMM-yyy)");
+	ClubApplication ca;
+	ArrayList<Booking> bookingList;
+	
+	public BookingPanel(ClubApplication ca){
+	this.ca = ca;
+	this.add(label);
+	this.add(tf);
+	this.add(l2);
+	this.add(list);
+	this.add(add);
+	this.add(remove);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+
+	}
+	
+	abstract class KeyEnter implements KeyListener{
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			if (arg0.getKeyCode()==KeyEvent.VK_ENTER){
+	            try {
+					checkDate();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}}
+	        }
+	}
+	
+	public void addButton(){
+		System.out.println("Opening add booking dialog");
+		Member m = ca.getSelectedMem();
+		Facility f = ca.getSelectedFac();
+		AddFacilityDialog afd = new AddFacilityDialog(ca);
+	}
+	
+	public void checkDate() throws ParseException{
+		String userDate = tf.getText();
+		SimpleDateFormat ft = new SimpleDateFormat ("d-MMM-yyyy");
+		Date dt = ft.parse(userDate);
+		if(!userDate.isEmpty()){
+			Facility f = ca.getSelectedFac();
+			if(f!=null){
+				refresh(f.getName(),dt);
+			}
+		}
+	}
+	
+	public void refresh(String name,Date dt){
+		bookingList = ca.getBookings(name,dt,dt);
+		System.out.println("Current : "+bookingList);
+		list.removeAll();
+		for(Booking b : bookingList){
+			list.add(b.toString());
+		}
+		}
+	
+}

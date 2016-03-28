@@ -1,0 +1,10 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+
+public class BookingRegister {
+	
+	ArrayList<Booking> listOfBookings = new ArrayList<Booking>();
+	
+
+}

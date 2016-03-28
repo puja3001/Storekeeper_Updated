@@ -1,0 +1,12 @@
+package sg.edu.iss.univsovsys;
+
+import java.util.ArrayList;
+
+public class Store {
+	
+	ArrayList<Category> catList = new ArrayList<Category>();
+	ArrayList<Product> prodList = new ArrayList<Product>();
+	ArrayList<Member> memList = new ArrayList<Member>();
+	//to be added
+
+}

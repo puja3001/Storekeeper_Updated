@@ -1,0 +1,62 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.Dialog;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class confirmDialog extends JDialog{
+	
+	JPanel panel;
+	JButton yes;
+	JButton no;
+	ClubApplication ca;
+	
+	public confirmDialog(ClubApplication ca){
+		this.ca = ca;
+		createFormPanel();
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(){
+		System.out.println("Creating dialog box");
+		panel = new JPanel();
+		yes = new JButton("Yes");
+		no = new JButton("No");
+		panel.add(yes);
+        panel.add(no);
+        add(panel);
+        setTitle("Remove");
+        setSize(150,100);
+        setVisible(true);
+        
+		yes.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				performOkAction();
+			}
+			});
+		no.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+	}
+	
+	public void performOkAction(){
+		ca.removeSelectedMember();
+		}
+	}
+	

@@ -1,0 +1,19 @@
+package sg.edu.iss.univsovsys;
+
+public class Member {
+	
+	private String memId;
+	private String memName;
+	private int loyaltyPoints;
+	private double totalSpent;
+	private double remSpent;
+	
+	public Member(String memId,String memName){
+		this.memId = memId;
+		this.memName = memName;
+		this.loyaltyPoints = 0;
+		this.totalSpent = 0;
+		this.remSpent = 0;
+	}
+
+}

@@ -1,0 +1,116 @@
+package window;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import objects.Member;
+
+/**
+ * 
+ * @author agarwal.puja
+ *
+ */
+
+public class MemberPanel extends JPanel{
+	
+	final List list = new List(15,true);
+	JLabel label = new JLabel("Members List");
+	JButton add = new JButton("Add");
+	JButton remove = new JButton("Remove");
+	JButton modify = new JButton("Modify");
+	ArrayList<Member> current_member_list;
+	
+	public MemberPanel(){
+	this.add(label);
+	this.add(list);
+	this.add(add);
+	this.add(remove);
+	this.add(modify);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+	modify.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			modifyButton();
+		}
+		});
+	}
+	
+	public void addButton(){
+		JPanel addPanel = new JPanel();
+		JButton ok = new JButton("Ok");
+		JButton cancel = new JButton("Cancel");
+		JTextField tf1,tf2;	
+		createForm(addPanel,tf1,tf2);
+	}
+	
+	public void createFormPanel(){
+		System.out.println("Creating dialog box");
+		GridLayout layout = new GridLayout(0,2);
+		JLabel l1 = new JLabel("First Name");
+		JLabel l2 = new JLabel("Second Name");
+		JLabel l3 = new JLabel("Last Name");
+		tf1 = new JTextField(10);
+		tf2 = new JTextField(10);
+		tf3 = new JTextField(10);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+		panel.add(l1);
+		panel.add(tf1);
+		panel.add(l2);
+		panel.add(tf2);
+		panel.add(l3);
+		panel.add(tf3);
+		panel.add(ok);
+        panel.add(cancel);
+        panel.setLayout(layout);
+        setTitle("Add Member");
+        add(panel);
+        setSize(300,200);
+        setVisible(true);
+        
+		ok.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					performOkAction();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			});
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+	}
+	
+	public void removeButton(){
+		
+	}
+	public void modifyButton(){
+		
+	}
+
+}

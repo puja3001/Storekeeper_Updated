@@ -1,0 +1,90 @@
+package window;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import objects.Category;
+
+public class AddProductDialog extends JDialog {
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JComboBox catList;
+	JTextField tf1,tf2,tf3,tf4,tf5,tf6,tf7,tf8;
+	//ArrayList<Category> cat_list = new ArrayList<Category>();
+	String[] cat_list;
+	
+	public AddProductDialog() {
+		createFormPanel();
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(){
+
+		GridLayout layout = new GridLayout(0,2);
+		panel = new JPanel();
+		JLabel l1 = new JLabel(" Product ID: ");
+		JLabel l2 = new JLabel(" Product Name: ");
+		JLabel l3 = new JLabel(" Description: ");
+		JLabel l4 = new JLabel(" Quantity: ");
+		JLabel l1 = new JLabel(" Price: ");
+		JLabel l2 = new JLabel(" Threshold: ");
+		catList = new JComboBox(cat_list);
+		String selectedCat = catList.getSelectedItem().toString();
+
+		tf1 = new JTextField(10);
+		tf2 = new JTextField(10);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+		panel.add(l1);
+		panel.add(tf1);
+		panel.add(l2);
+		panel.add(tf2);
+		panel.add(ok);
+        panel.add(cancel);
+        panel.setLayout(layout);
+        setTitle("Add New Member");
+        add(panel);
+        setSize(300,200);
+        setVisible(true);
+        
+		ok.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					performOkAction();
+			}
+			});
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+	}
+
+
+	public void performOkAction(){
+		String name = tf1.getText();
+		String id = tf2.getText();
+		if(!name.isEmpty() && !id.isEmpty()){
+			//ca.addMember(ln, fn, sn);
+			dispose();
+		}
+	}
+
+}

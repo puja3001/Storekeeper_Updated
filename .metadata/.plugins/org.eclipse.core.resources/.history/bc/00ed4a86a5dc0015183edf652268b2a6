@@ -1,0 +1,13 @@
+package sg.edu.iss.univsovsys;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class LogIn extends JPanel{
+	
+	JLabel l1,l2;
+	JTextField t1,t2;
+	
+
+}

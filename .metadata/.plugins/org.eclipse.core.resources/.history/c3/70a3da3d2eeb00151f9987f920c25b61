@@ -1,0 +1,36 @@
+package window;
+
+import java.awt.List;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import objects.Member;
+
+public class MemberPanel extends JPanel{
+	
+	final List list = new List(10,true);
+	JButton add = new JButton("Add");
+	JButton remove = new JButton("Remove");
+	ArrayList<Member> current_member_list;
+	
+	public MemberPanel(){
+	this.add(list);
+	this.add(add);
+	this.add(remove);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+	}
+
+	}
+
+}

@@ -1,0 +1,76 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import sg.edu.nus.iss.club.Facility;
+
+public class FacilitiesPanel extends JPanel {
+
+	final List list = new List(10,true);
+	JButton add = new JButton("Add");
+	JButton remove = new JButton("Remove");
+	ClubApplication ca;
+	HashMap<String,Facility> current_fac_list;
+	
+	public FacilitiesPanel(ClubApplication ca){
+	this.ca = ca;
+	this.add(list);
+	this.add(add);
+	this.add(remove);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+
+	}
+	
+	public void addButton(){
+		System.out.println("Opening add facility dialog");
+		AddFacilityDialog afd = new AddFacilityDialog(ca);
+	}
+	
+	public void removeButton(){
+		Facility f = getSelectedFacility();
+		if(f!=null){
+			System.out.println("Opening remove member dialog");
+			confirmDialog cd = new confirmDialog(ca,this);
+		}
+		else{
+			JOptionPane.showMessageDialog(this,"Please select a facility for removal.");
+		}
+	}
+	
+	public Facility getSelectedFacility(){
+		int i = list.getSelectedIndex();
+		System.out.println("print "+i);
+		if(i>=0){
+			Facility f = current_fac_list.get(i);
+			System.out.println("print fac "+f);
+			return f;
+		}
+		return null;
+	}
+	
+	public void refresh(){
+		//System.out.println("Refresh");
+		current_fac_list = ca.getFacilities();
+		System.out.println("Current : "+current_fac_list);
+		list.removeAll();
+		Iterator it = current_fac_list.entrySet().iterator();
+		}
+	
+}

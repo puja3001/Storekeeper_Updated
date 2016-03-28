@@ -1,0 +1,11 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class BookingRegister {
+	
+	HashMap<Facility,Booking> listOfBookings = new HashMap<Facility,Booking>();
+	
+
+}

@@ -1,0 +1,32 @@
+package sg.edu.iss.univsovsys;
+
+import java.awt.GridLayout;
+
+import sg.edu.nus.iss.club.gui.ClubWindow;
+
+public class StoreApplication {
+	
+	Store store;
+	
+	public StoreApplication(){
+		store = new Store();
+		frame = new StoreSystem(this);
+	}
+	
+	public static void main(String args[]){
+		StoreApplication sa = new StoreApplication();
+		sa.start();
+	}
+	
+	public void start(){
+		frame.setLayout(new GridLayout(2,0));
+		frame.setSize(600,500);
+		frame.setVisible(true);
+	}
+	
+	public void shutdown(){
+		//System.out.println("Closing Window");
+		//System.exit(1);
+	}
+
+}

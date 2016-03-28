@@ -1,0 +1,101 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import sg.edu.nus.iss.club.Booking;
+import sg.edu.nus.iss.club.Club;
+import sg.edu.nus.iss.club.Facility;
+import sg.edu.nus.iss.club.Member;
+
+public class ClubFileStore {
+	
+	Club club;
+	String fn1,fn2,fn3;
+	
+	public ClubFileStore(Club club,String fn1,String fn2,String fn3){
+		this.club = club;
+		this.fn1 = fn1;
+		this.fn2 = fn2;
+		this.fn3 = fn3;
+	}
+	
+
+	
+	public void retrieveMembers() throws IOException{
+		FileReader fr = new FileReader(fn1);
+		BufferedReader br = new BufferedReader(fr);
+		
+		FileInputStream fis = new FileInputStream("D:\\JavaWkFiles\\members.sav");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		ArrayList<Member> memRet = new ArrayList<Member>();
+		
+		while(ois.readObject() != null){
+			System.out.println(((Member)ois.readObject()).toString());
+		}
+
+		//for(int i=0;i<size;i++){
+			//memRetrieve[i] = 
+		//}
+		br.close();
+	}
+	
+	public void storeMembers(ArrayList<Member> mem) throws IOException{
+		FileWriter r = new FileWriter(fn1);
+		PrintWriter dout = new PrintWriter(r);
+		
+		String check = "D:\\JavaWkFiles\\members.sav";
+		FileOutputStream fos = new FileOutputStream(check);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		
+		//dout.println(mem.size());
+		for(int i=0;i<mem.size();i++){
+			storeString(dout,mem.get(i).toString());
+			dout.print(" "+mem.get(i).getMemberNumber());
+			dout.print("\n");
+			oos.writeObject(mem.get(i));
+		}
+		dout.close();
+	}
+	
+	public void storeFacilities(ArrayList<Facility> fac) throws IOException{
+		FileWriter r = new FileWriter(fn2);
+		PrintWriter dout = new PrintWriter(r);
+		//dout.println(fac.size());
+		for(int i=0;i<fac.size();i++){
+			storeString(dout,fac.get(i).getName());
+			dout.print(" ");
+			storeString(dout,fac.get(i).getDescription());
+			dout.print("\n");
+		}
+		dout.close();
+	}
+	
+	public void storeBookings(ArrayList<Booking> book) throws IOException{
+		FileWriter r = new FileWriter(fn3);
+		PrintWriter dout = new PrintWriter(r);
+		//dout.println(book.size());
+		for(int i=0;i<book.size();i++){
+			dout.print(book.toString());
+			dout.print("\n");
+		}
+		dout.close();
+	}
+
+	public void storeString(PrintWriter dout,String str) throws IOException{
+		//dout.print(str.length()+" ");
+		for(int i =0;i<str.length();i++){
+			dout.print(str.charAt(i));
+		}
+	}
+}

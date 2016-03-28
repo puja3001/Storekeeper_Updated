@@ -1,0 +1,35 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.event.WindowEvent;
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+
+public class ClubApplication {
+	
+	Club club = new Club();
+	
+	public static void main(String args[]){
+		
+		ClubApplication ca = new ClubApplication();
+		ca.start();
+	}
+	
+	public void start(){
+		ClubWindow frame = new ClubWindow();
+		frame.setSize(270,70);
+		frame.setVisible(true);
+	}
+	
+	public void shutdown(){
+		//System.out.println("Closing Window");
+		//System.exit(1);
+	}
+	
+	public List<Member> getMembers(){
+		club.getMembers();
+	}
+	public void addMember(){
+		//club.addMember();
+	}
+	
+}

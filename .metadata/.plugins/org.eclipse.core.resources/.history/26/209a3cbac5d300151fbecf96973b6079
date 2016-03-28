@@ -1,0 +1,16 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+public class BookingRegister {
+	
+	private HashMap<Facility,ArrayList<Booking>> listOfBookings = new HashMap<Facility,ArrayList<Booking>>();
+		
+	public void addBooking(Member m,Facility f,Date sd,Date ed) throws BadBookingException{
+		Booking b1 = new Booking(m,f,sd,ed);
+		ArrayList<Booking> fac = listOfBookings.get(f);
+	}
+	
+}

@@ -1,0 +1,138 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import javax.swing.JLabel;
+
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+
+public class ClubApplication {
+	
+	Club club;
+	ClubFileStore clubstore;
+	ClubWindow frame;
+	MemberPanel mp;
+	FacilitiesPanel fp;
+	BookingPanel bp;
+	
+	public ClubApplication(){
+	//club = new Club();
+	frame = new ClubWindow(this);
+	mp = new MemberPanel(this);
+	fp = new FacilitiesPanel(this);
+	bp = new BookingPanel(this);
+}
+
+	public static void main(String args[]) throws IOException{
+		ClubApplication ca = new ClubApplication();
+		ca.start(args[0]);
+	}
+	
+	public void getClubFile(String filepath) throws IOException{
+		File filename = new File(filepath);
+		if((!filename.exists()) || (!filename.isFile())){
+			System.out.println("Not a valid directory");
+			filename.createNewFile();
+		}
+		//System.out.println("filename: "+filename.toString());
+		club = new Club("clubdata.txt");
+	}
+	
+	public void start(String fn) throws IOException{
+		getClubFile(fn);
+		frame.setLayout(new GridLayout(2,0));
+		frame.setSize(600,500);
+		frame.add(mp);
+		frame.add(fp);
+		frame.add(bp);
+		frame.setVisible(true);
+	}
+	
+	public void shutdown(){
+		//System.out.println("Closing Window");
+		//System.exit(1);
+	}
+	
+	public ArrayList<Member> getMembers(){
+		ArrayList<Member> members = club.getMembers();
+		return members;
+	}
+	
+	public HashMap<String,Facility> getFacilities(){
+		HashMap<String,Facility> fac = club.getFacilities();
+		return fac;
+	}
+	
+	public void addMember(String ln,String fn,String sn) throws IOException{
+		club.addMember(ln,fn,sn);
+		mp.refresh();
+	}
+	
+	public void addFacility(String name,String desc) throws IOException{
+		club.addFacility(name,desc);
+		fp.refresh();
+	}
+	
+	public void addBooking(int memId,String fName,String date1,String date2,String date) throws BadBookingException, ParseException{
+		SimpleDateFormat ft = new SimpleDateFormat ("d-MMM-yyyy hh:mm");
+		Date dt1 = ft.parse(date1);
+		Date dt2 = ft.parse(date2);
+		club.addBooking(memId,fName,dt1,dt2);
+		bp.refresh(fName,date);
+	}
+	
+	public void removeSelectedMember(){
+		Member m = mp.getSelectedMember();
+		int memId = m.getMemberNumber();
+		club.removeMember(memId);
+		mp.refresh();
+	}
+	
+	public void removeSelectedFacility(){
+		Facility f = fp.getSelectedFacility();
+		String name = f.getName();
+		System.out.println("fac name: "+name);
+		club.removeFacility(name);
+		fp.refresh();
+	}
+	
+	public void removeSelectedBooking(){
+		Booking b = bp.getSelectedBooking();
+		club.removeBooking(b);
+		//bp.refresh();
+	}
+	
+	public Facility getSelectedFac(){
+		Facility f = fp.getSelectedFacility();
+		if(f!=null){
+			return f;
+		}
+		else{
+			return null;
+		}
+		}
+	
+	public Member getSelectedMem(){
+		Member m = mp.getSelectedMember();
+		if(m!=null){
+			return m;
+		}
+		else{
+			return null;
+		}
+		}
+	
+	public ArrayList<Booking> getBookings(String fName,Date sd,Date ed){
+		ArrayList<Booking> bookings = club.getBookings(fName, sd, ed);
+		return bookings;
+	}
+	
+}

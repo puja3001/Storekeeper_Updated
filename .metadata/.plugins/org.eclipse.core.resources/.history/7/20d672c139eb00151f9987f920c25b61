@@ -1,0 +1,14 @@
+package window;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class AddMemberDialog extends JDialog {
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JTextField tf1,tf2;
+
+}

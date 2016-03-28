@@ -1,0 +1,103 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import sg.edu.nus.iss.club.Facility;
+import sg.edu.nus.iss.club.Member;
+
+public class AddBookingDialog extends JDialog {
+	
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JLabel l1,l2,l3,l4,l5,l6,l7,l8;
+	JTextField tf1,tf2;
+	ClubApplication ca;
+	
+
+	public AddBookingDialog(ClubApplication ca,Member mem,Facility fac,String dt) {
+		System.out.println("Hello booking facility");
+		this.ca = ca;
+		createFormPanel(mem,fac,dt);
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(Member mem,Facility fac,String dt){
+		System.out.println("Creating dialog box");
+		
+		int memId = mem.getMemberNumber();
+		String fName = fac.getName();
+		
+		GridLayout layout = new GridLayout(0,2);
+		panel = new JPanel();
+		l1 = new JLabel("Facility Name");
+		l2 = new JLabel("Member Name");
+		l3 = new JLabel("Date");
+		l4 = new JLabel(mem.toString());
+		l5 = new JLabel(fac.toString());
+		l6 = new JLabel(dt);
+		l7 = new JLabel("Start time (hh:mm)");
+		l8 = new JLabel("Start time (hh:mm)");
+		tf1 = new JTextField(10);
+		tf2 = new JTextField(10);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+		panel.add(l1);
+		panel.add(l2);
+		panel.add(l3);
+		panel.add(l4);
+		panel.add(l5);
+		panel.add(l6);
+		panel.add(l7);
+		panel.add(tf1);
+		panel.add(l8);
+		panel.add(tf2);
+		panel.add(ok);
+        panel.add(cancel);
+        panel.setLayout(layout);
+        setTitle("Add Booking");
+        add(panel);
+        setSize(300,200);
+        setVisible(true);
+        
+		ok.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				performOkAction(memId,fName,dt);
+			}
+			});
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+	}
+
+
+	public void performOkAction(int memId,String fName,String dt){
+		String st = dt+" "+tf1.getText();
+		String et = dt+" "+tf2.getText();
+		
+		if(!st.isEmpty() && !et.isEmpty()){
+			ca.addBooking(memId,fName,);
+			dispose();
+		}
+	}
+
+}

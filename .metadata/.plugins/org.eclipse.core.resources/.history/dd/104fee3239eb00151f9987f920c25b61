@@ -1,0 +1,68 @@
+package window;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import objects.Member;
+
+/**
+ * 
+ * @author agarwal.puja
+ *
+ */
+
+public class MemberPanel extends JPanel{
+	
+	final List list = new List(15,true);
+	JLabel label = new JLabel("Members List: ");
+	JButton add = new JButton("Add");
+	JButton remove = new JButton("Remove");
+	JButton modify = new JButton("Modify");
+	ArrayList<Member> current_member_list;
+	
+	public MemberPanel(){
+	this.add(label);
+	this.add(list);
+	this.add(add);
+	this.add(remove);
+	this.add(modify);
+	add.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+	modify.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			modifyButton();
+		}
+		});
+	}
+	
+	public void addButton(){
+	}
+	
+	
+	public void removeButton(){
+		
+	}
+	public void modifyButton(){
+		
+	}
+
+}

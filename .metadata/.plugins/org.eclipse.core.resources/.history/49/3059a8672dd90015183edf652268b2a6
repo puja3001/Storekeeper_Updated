@@ -1,0 +1,28 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.*;
+import javax.swing.*;
+
+public class AddMemberDialog extends Dialog {
+
+	public AddMemberDialog(Frame parent) {
+		super(parent,true);
+		Panel panel = new Panel();
+        panel.add(new Button("Ok"));
+        add(panel);
+        setSize(200,200);
+	}
+	
+	public void createFormPanel(){
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("Add The Details"));
+		JTextField tf1 = new JTextField();
+		JTextField tf2 = new JTextField();
+		JTextField tf3 = new JTextField();
+		panel.add(tf1);
+		panel.add(tf2);
+		panel.add(tf3);
+		
+	}
+
+}

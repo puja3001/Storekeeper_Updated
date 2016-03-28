@@ -1,0 +1,40 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import sg.edu.nus.iss.club.Club;
+import sg.edu.nus.iss.club.Member;
+
+public class ClubFileStore {
+	
+	Club club;
+	
+	public ClubFileStore(Club club){
+		this.club = club;
+	}
+	
+	public void store(Club club,String filename,Club[] club1) throws IOException{
+		FileOutputStream out = new FileOutputStream(filename,true);
+		DataOutputStream dout = new DataOutputStream(out);
+		dout.writeInt(club1.length);
+		for(int i=0;i<club1.length;i++){
+			storeMembers(dout,club1[i].getMembers());	
+		}
+		dout.close();
+	}
+	
+	public void storeMembers(DataOutputStream dout,ArrayList<Member> mem) throws IOException{
+		dout.writeInt(mem.size());
+		for(int i =0;i<mem.size();i++){
+			storeString(dout,mem.get(i).getFirstName());
+			storeString(dout,mem.get(i).getFirstName());
+			storeString(dout,mem.get(i).getFirstName());
+			storeInt(dout,mem.get(i).getMemberNumber());
+		}
+	}
+
+}

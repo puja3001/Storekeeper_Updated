@@ -1,0 +1,77 @@
+package window;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import objects.Category;
+import objects.Vendor;
+
+/**
+ * 
+ * @author agarwal.puja
+ *
+ */
+
+public class VendorPanel extends JPanel{
+	
+	final List cat_list = new List(15,true);
+	final List ven_list = new List(15,true);
+	JLabel label1 = new JLabel("Category List: ");
+	JLabel label2 = new JLabel("Associated Vendor List: ");
+	JButton addV = new JButton("Add New Vendor To Category");
+	JButton removeV = new JButton("Delete Vendor From Category");
+	JButton remove = new JButton("Remove Vendor");
+	JButton modify = new JButton("Modify Vendor Details");
+	ArrayList<Category> current_category_list;
+	HashMap<String,ArrayList>> vendor_map = new HashMap<String,ArrayList<Vendor>>();
+	
+	public VendorPanel(){
+	//this.setLayout(new GridLayout(0,4));
+	this.add(label1);
+	this.add(cat_list);
+	this.add(label2);
+	this.add(ven_list);
+	this.add(addV);
+	this.add(removeV);
+	this.add(remove);
+	this.add(modify);
+	addV.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			addButton();
+		}
+		});
+	remove.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			removeButton();
+		}
+		});
+	modify.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			modifyButton();
+		}
+		});
+	}
+	
+	public void addButton(){
+	}
+	
+	
+	public void removeButton(){
+		
+	}
+	public void modifyButton(){
+		
+	}
+
+}

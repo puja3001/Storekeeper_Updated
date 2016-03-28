@@ -1,0 +1,21 @@
+package sg.edu.nus.iss.club.gui;
+
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+import java.awt.Panel;
+
+public class MemberPanel extends Panel {
+	
+	List list = new List();
+	Button add = new Button("Add");
+	ClubApplication ca;
+	
+	public MemberPanel(){
+	ca = new ClubApplication();
+	}
+	
+	public void refresh(){
+		List current_member_list = ca.getMembers();
+		//TODO
+	}
+}

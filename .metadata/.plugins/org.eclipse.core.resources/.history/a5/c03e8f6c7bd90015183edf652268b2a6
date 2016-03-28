@@ -1,0 +1,93 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.JLabel;
+
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+
+public class ClubApplication {
+	
+	Club club;
+	ClubWindow frame;
+	MemberPanel mp;
+	FacilitiesPanel fp;
+	BookingPanel bp;
+	
+	public ClubApplication(){
+	club = new Club();
+	frame = new ClubWindow(this);
+	mp = new MemberPanel(this);
+	fp = new FacilitiesPanel(this);
+	bp = new BookingPanel(this);
+}
+
+	public static void main(String args[]){
+		ClubApplication ca = new ClubApplication();
+		ca.start();
+	}
+	
+	public void start(){
+		frame.setLayout(new GridLayout(2,0));
+		frame.setSize(600,500);
+		frame.add(mp);
+		frame.add(fp);
+		frame.add(bp);
+		frame.setVisible(true);
+	}
+	
+	public void shutdown(){
+		//System.out.println("Closing Window");
+		//System.exit(1);
+	}
+	
+	public ArrayList<Member> getMembers(){
+		ArrayList<Member> members = club.getMembers();
+		return members;
+	}
+	
+	public HashMap<String,Facility> getFacilities(){
+		HashMap<String,Facility> fac = club.getFacilities();
+		return fac;
+	}
+	
+	public void addMember(String ln,String fn,String sn){
+		club.addMember(ln,fn,sn);
+		mp.refresh();
+	}
+	
+	public void addFacility(String name,String desc){
+		club.addFacility(name,desc);
+		fp.refresh();
+	}
+	
+	public void removeSelectedMember(){
+		Member m = mp.getSelectedMember();
+		int memId = m.getMemberNumber();
+		club.removeMember(memId);
+		mp.refresh();
+	}
+	
+	public void removeSelectedFacility(){
+		Facility f = fp.getSelectedFacility();
+		String name = f.getName();
+		System.out.println("fac name: "+name);
+		club.removeFacility(name);
+		fp.refresh();
+	}
+	
+	public Facility getSelectedFac(){
+		Facility f = fp.getSelectedFacility();
+		if(f!=null){
+			return f;
+		}
+		else{
+			return null;
+		}
+		}
+	}
+	
+}

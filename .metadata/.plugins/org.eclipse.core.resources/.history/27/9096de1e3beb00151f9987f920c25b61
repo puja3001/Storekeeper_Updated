@@ -1,0 +1,7 @@
+package window;
+
+import javax.swing.JDialog;
+
+public class confirmDialog extends JDialog{
+
+}

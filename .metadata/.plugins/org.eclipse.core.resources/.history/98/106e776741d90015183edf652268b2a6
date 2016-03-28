@@ -1,0 +1,29 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class ClubWindow extends JFrame{
+
+	ClubApplication ca = new ClubApplication();
+	
+	public ClubWindow(){
+		super("Club Management System");
+		//this.setLayout(new FlowLayout());
+		WindowListener listener = new WindowAdapter(){
+			public void windowClosing(WindowEvent e){
+				ca.shutdown();
+				System.out.println("Closing Window");
+				System.exit(1);
+			}
+		};
+			addWindowListener(listener);
+	}
+}
+		
+

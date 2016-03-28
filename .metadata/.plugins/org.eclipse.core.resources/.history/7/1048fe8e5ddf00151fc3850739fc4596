@@ -1,0 +1,64 @@
+package sg.edu.nus.iss.club;
+
+import java.util.Date;
+
+public class Booking {
+	
+	private Member member;
+	private Facility facility;
+	private Date startDate;
+	private Date endDate;
+	
+	public Booking(Member m,Facility f,Date sd,Date ed) throws BadBookingException{
+		
+		this.member = m;
+		this.facility = f;
+		this.startDate = sd;
+		this.endDate = ed;
+	}
+	
+	public boolean overlaps(Booking book){
+		if(this.facility == book.facility){
+			if((this.startDate.after(book.startDate) && 
+					this.startDate.before(book.endDate)) || book.startDate.equals(this.startDate) || 
+					book.startDate.equals(this.endDate) || 
+					(this.endDate.after(book.startDate) && this.endDate.before(book.endDate)) || 
+					book.endDate.equals(this.startDate) || book.endDate.equals(this.endDate) ||
+					(this.startDate.before(book.startDate) && this.endDate.after(book.endDate)) ){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public Member getMember(){
+		return member;
+	}
+	public Facility getFacility(){
+		return facility;
+	}
+	public Date getStartDate(){
+		return startDate;
+	}
+	public Date getEndDate(){
+		return endDate;
+	}
+	
+	public String toString(){
+		String member_name = member.toString();
+		String facility_name = facility.toString();
+		String booking_date = startDate.toString()+" - "+endDate.toString();
+		String booking_info = member_name+" : "+facility_name+" : "+booking_date;
+		return booking_info;
+	}
+	
+	public void show(){
+		System.out.println(toString());
+	}
+	
+}

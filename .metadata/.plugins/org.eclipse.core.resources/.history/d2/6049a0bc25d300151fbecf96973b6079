@@ -1,0 +1,53 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Club {
+
+	private int array_size_increment;
+	private int numMembers;
+	private static int count=1;
+	private List<Member> members=new ArrayList<Member>();
+	
+	public Member addMember(String surname,String firstName,String secondName){
+		System.out.println("Print values: "+count);
+		Member m = new Member(surname,secondName,firstName,count);
+		members.add(m);
+		count++;
+		return m;
+	}
+
+	public List<Member> getMembers(){
+		return members;
+	}
+		
+	public void showMembers(){
+		System.out.println("Members of the club::\n");
+		for(int i=0;i<members.size();i++){
+			System.out.println(members.get(i)+"\n");
+			}
+	}
+	
+	public Member getMember(int memberNum){
+		for(int i=0;i<members.size();i++){
+			if(members.get(i).memberNumber==memberNum){
+				return members.get(i);
+				}
+			}
+		return null;
+	}
+	
+	public void removeMember(int memberNum){
+		for(int i=0;i<members.size();i++){
+			if(members.get(i).memberNumber==memberNum){
+				System.out.println("Removing member with id: "+memberNum);
+				members.remove(i);
+				System.out.println("...Removed!!");
+			}
+			else{
+				System.out.println("Member not present");
+			}
+		}
+	}
+	}

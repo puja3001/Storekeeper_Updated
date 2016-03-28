@@ -1,0 +1,12 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.*;
+import java.awt.Panel;
+
+public class MemberPanel extends Panel {
+	
+	List list = new List();
+	Button add = new Button("Add");
+	ClubApplication ca = new ClubApplication();
+
+}

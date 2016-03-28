@@ -1,0 +1,28 @@
+package sg.edu.iss.univsovsys;
+
+public class Product {
+	
+	private String prodCat;
+	private String prodName;
+	private String desc;
+	private int quantity;
+	private String prodId;
+	private double price;
+	private int barCode;
+	private int threshold;
+	private int oderQuan;
+	
+	public Product(String prodCat,String prodName,String desc,int quantity,String prodId,double price,int barCode,int threshold,int oderQuan){
+		this.prodCat = prodCat;
+		this.prodName = prodName;
+		this.desc = desc;
+		this.quantity = quantity;
+		this.prodId = prodId;
+		this.price = price;
+		this.barCode = barCode;
+		this.threshold = threshold;
+		this.oderQuan = oderQuan;
+		
+	}
+
+}

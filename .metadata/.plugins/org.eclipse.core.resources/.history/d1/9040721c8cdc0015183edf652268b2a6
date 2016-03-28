@@ -1,0 +1,62 @@
+package sg.edu.iss.univsovsys;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Store {
+	
+	ArrayList<Category> catList = new ArrayList<Category>();
+	ArrayList<Product> prodList = new ArrayList<Product>();
+	ArrayList<Member> memList = new ArrayList<Member>();
+	HashMap<String,Member> memMap = new HashMap<String,Member>();
+	HashMap<String,Product> prodMap = new HashMap<String,Product>();
+	//to be added
+	
+	public void addMember(String name,String memId){
+		Member m = new Member(memId,name,-1,0,0);
+		memList.add(m);
+		memMap.put(memId,m);
+	}
+	
+	public Member getMember(String memId){
+		Member mem = memMap.get(memId);
+		return mem;	
+	}
+	
+	public ArrayList<Member> getMembers(){
+		return memList;	
+	}
+	
+	public void deleteMem(String memId){
+		for(int i=0;i<memList.size();i++){
+			if(memList.get(i).getMemId() == memId){
+				memList.remove(i);
+			}
+		}
+		memMap.remove(memId);
+	}
+	
+	public void addProduct(String prodId,String prodCat,String prodName,String desc,int quantity,double price,int barCode,int threshold,int orderQuan){
+		Product p = new Product(prodCat,prodName,desc,quantity,prodId,price,barCode,threshold,orderQuan);
+		prodList.add(p);
+		prodMap.put(prodId, p);
+	}
+	
+	public Product getProduct(String prodId){
+		Product prod = prodMap.get(prodId);
+		return prod;
+	}
+	
+	public ArrayList<Product> getProducts(){
+		return prodList;
+	}
+	
+	public void removeProduct(String prodId){
+		for(int i=0;i<prodList.size();i++){
+			if(prodList.get(i).getProdId() == prodId){
+				prodList.remove(i);
+			}
+		}
+		prodMap.remove(prodId);
+	}
+}

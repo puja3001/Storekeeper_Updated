@@ -1,0 +1,34 @@
+package sg.edu.nus.iss.club;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+public class BookingRegister {
+	
+	private HashMap<Facility,ArrayList<Booking>> listOfBookings = new HashMap<Facility,ArrayList<Booking>>();
+		
+	public void addBooking(Member m,Facility f,Date sd,Date ed) throws BadBookingException{
+		int overlap=0;
+		Booking b1 = new Booking(m,f,sd,ed);
+		ArrayList<Booking> fac = listOfBookings.get(f);
+		if (fac == null){
+			ArrayList<Booking> bookings = new ArrayList<Booking>();
+			bookings.add(b1);
+			listOfBookings.put(f, bookings);
+			System.out.println("Booking Added");
+		}
+		else{
+			for(Booking b: fac){
+				if(b1.overlaps(b)){
+					overlap++;
+					throw new BadBookingException("Already Existing Booking");
+				}
+			}
+			if(overlap == 0){
+				fac.add(b1);
+			}
+		}
+	}
+	
+}

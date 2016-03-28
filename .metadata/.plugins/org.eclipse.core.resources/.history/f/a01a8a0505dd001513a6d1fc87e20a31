@@ -1,0 +1,35 @@
+package sg.edu.iss.univsovsys;
+
+import java.awt.GridLayout;
+
+public class StoreApplication {
+	
+	Store store;
+	StoreSystem mainFrame;
+	LogIn log;
+	
+	public StoreApplication(){
+		store = new Store();
+		mainFrame = new StoreSystem(this);
+		log = new LogIn(this);
+	}
+	
+	public static void main(String args[]){
+		System.out.println("Puja");
+		StoreApplication sa = new StoreApplication();
+		sa.start();
+	}
+	
+	public void start(){
+		mainFrame.add(log);
+		mainFrame.setLayout(new GridLayout(2,0));
+		mainFrame.setSize(400,200);
+		mainFrame.setVisible(true);
+	}
+	
+	public void shutdown(){
+		System.out.println("Closing Window");
+		System.exit(1);
+	}
+
+}

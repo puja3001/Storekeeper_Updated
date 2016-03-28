@@ -1,0 +1,26 @@
+package window;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+/**
+ * 
+ * @author agarwal.puja
+ *
+ */
+public class MainManageWindow extends JFrame {
+	
+	JTabbedPane tabbedPane = new JTabbedPane();
+	JPanel panel1 = new JPanel();
+	
+	public MainManageWindow() 
+	   { 
+	      super(); 
+	      this.setSize(500, 500); 
+	      this.setLocation(600, 300);
+	      this.add(tabbedPane);
+	      tabbedPane.addTab("Members", panel1);
+	      this.getContentPane().setLayout(null);
+	      this.setTitle("Main Window"); 
+	   } 
+}

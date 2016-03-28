@@ -1,0 +1,10 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.List;
+import java.awt.Panel;
+
+public class MemberPanel extends Panel {
+	
+	List list = new List();
+
+}

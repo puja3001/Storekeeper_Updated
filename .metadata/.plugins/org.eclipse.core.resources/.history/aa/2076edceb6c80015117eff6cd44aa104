@@ -1,0 +1,39 @@
+package sg.edu.nus.iss.club;
+
+public class ClubApplication {
+
+    public static void main (String args[]) {
+
+        Person member1, member2, member3;
+        Facility fac1, fac2, fac3;
+        Club c1=new Club();
+
+        member1 = new Person ("Edison", "Thomas", "Alva");
+        member2 = new Person ("Baggio", "Roberto", null);
+        member3 = new Person ("Webber", "Andrew", "Lloyd");
+        
+        Member m1=new Member("Agarwal","Puja",null,1969);
+        //Member m2=c1.addMember("Agarwal", "Puja", "LL");
+        //Member m3=c1.addMember("Agarwal", "Puja", "LL1");
+        
+        fac1 = new Facility ("Main Hall", null);
+        fac2 = new Facility ("Room1", "Conference Room on Level 2");
+        fac3 = new Facility ("Room2", "Meeting Room on Level 3");
+
+        System.out.println ("Members:");
+        member1.show ();
+        member2.show ();
+        member3.show ();
+        m1.show();
+        //m2.show();
+        //m3.show();
+        Member mk=c1.getMembers();
+        String s=mk.toString();
+        System.out.println("Showw"+s;)
+        System.out.println ("\nFacilities:");
+        fac1.show ();
+        fac2.show ();
+        fac3.show ();
+    }
+
+}

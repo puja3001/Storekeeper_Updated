@@ -1,0 +1,94 @@
+package window;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class AddCategoryDialog extends JDialog {
+	JPanel panel;
+	JButton ok;
+	JButton cancel;
+	JButton addVendor;
+	JTextField tf1,tf2;
+	ArrayList<JTextField> listOfVendorNames = new ArrayList<JTextField>();
+	ArrayList<JTextField> listOfVendorDesc = new ArrayList<JTextField>();
+
+	public AddCategoryDialog() {
+		createFormPanel();
+        addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              dispose();
+           }
+        });
+	}
+	
+	public void createFormPanel(){
+
+		GridLayout layout = new GridLayout(0,2);
+		panel = new JPanel();
+		JLabel l1 = new JLabel(" Category Name: ");
+		JLabel l2 = new JLabel(" Category Code: ");
+		JLabel l3 = new JLabel(" Associate Vendors To Category: ");
+		tf1 = new JTextField(10);
+		tf2 = new JTextField(10);
+		ok = new JButton("Ok");
+		cancel = new JButton("Cancel");
+		addVendor = new JButton("Click Here To Add Vendors");
+		
+		panel.add(l1);
+		panel.add(tf1);
+		panel.add(l2);
+		panel.add(tf2);
+		panel.add(l3);
+		panel.add(addVendor);
+		
+		addVendor.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Enter Add new vendor");
+				JLabel l_name = new JLabel("Vendor Name:");
+				JLabel l_desc = new JLabel("Description:");
+				JTextField tf_name = new JTextField(10);
+				listOfVendorNames.add(tf_name);
+				JTextField tf_desc = new JTextField(15);
+				listOfVendorDesc.add(tf_desc);
+				panel.add(l_name);
+				panel.add(tf_name);
+				panel.add(l_desc);
+				panel.add(tf_desc);
+			}
+			});
+		
+		panel.add(ok);
+		panel.add(cancel);
+		panel.setLayout(layout);
+        setTitle("Add New Category");
+        add(panel);
+        setSize(400,250);
+        setVisible(true);
+		
+		ok.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					//performOkAction();
+			}
+			});
+		cancel.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			});
+		
+	}
+}

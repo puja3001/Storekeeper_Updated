@@ -1,0 +1,10 @@
+package sg.edu.nus.iss.club.gui;
+
+import javax.swing.JFrame;
+
+public class ClubWindow extends JFrame{
+	public static void main(String args[]){
+		JFrame main_frame = new JFrame("Club");
+	}
+
+}

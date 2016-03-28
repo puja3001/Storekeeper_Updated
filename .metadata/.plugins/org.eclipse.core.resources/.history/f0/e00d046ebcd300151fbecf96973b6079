@@ -1,0 +1,12 @@
+package sg.edu.nus.iss.club;
+
+import java.util.Date;
+
+public class Booking {
+	
+	private Member member;
+	private Facility facility;
+	Date startDate = new Date();
+	Date endDate = new Date();
+
+}

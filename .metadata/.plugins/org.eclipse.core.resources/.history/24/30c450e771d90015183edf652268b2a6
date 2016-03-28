@@ -1,0 +1,7 @@
+package sg.edu.nus.iss.club.gui;
+
+import javax.swing.JDialog;
+
+public class AddFacilityDialog extends JDialog{
+
+}

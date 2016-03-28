@@ -1,0 +1,68 @@
+package sg.edu.nus.iss.club.gui;
+
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
+
+import sg.edu.nus.iss.club.*;
+import java.awt.*;
+
+public class ClubApplication {
+	
+	Club club;
+	ClubWindow frame;
+	MemberPanel mp;
+	FacilitiesPanel fp;
+	
+	public ClubApplication(){
+	club = new Club();
+	frame = new ClubWindow(this);
+	mp = new MemberPanel(this);
+	fp = new FacilitiesPanel(this);
+}
+
+	public static void main(String args[]){
+		ClubApplication ca = new ClubApplication();
+		ca.start();
+	}
+	
+	public void start(){
+		frame.setSize(300,250);
+		frame.add(mp);
+		frame.setVisible(true);
+	}
+	
+	public void shutdown(){
+		//System.out.println("Closing Window");
+		//System.exit(1);
+	}
+	
+	public ArrayList<Member> getMembers(){
+		ArrayList<Member> members = club.getMembers();
+		return members;
+	}
+	
+	public ArrayList<Facility> getFacilities(){
+		ArrayList<Facility> fac = club.getFacilities();
+		return fac;
+	}
+	
+	public void addMember(String ln,String fn,String sn){
+		club.addMember(ln,fn,sn);
+		mp.refresh();
+	}
+	
+	public void addFacility(String name,String desc){
+		club.addFacility(name,desc);
+		fp.refresh();
+	}
+	
+	public void removeSelectedMember(){
+		Member m = mp.getSelectedMember();
+		int memId = m.getMemberNumber();
+		club.removeMember(memId);
+		mp.refresh();
+	}
+	
+}

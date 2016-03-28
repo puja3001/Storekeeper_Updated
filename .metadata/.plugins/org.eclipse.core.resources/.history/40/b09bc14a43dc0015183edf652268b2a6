@@ -1,0 +1,11 @@
+package sg.edu.iss.univsovsys;
+
+public class Product {
+	
+	private String prodCat;
+	private String prodName;
+	private String desc;
+	private String prodId;
+	private double price;
+
+}
